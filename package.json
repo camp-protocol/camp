@@ -1,0 +1,83 @@
+{
+  "name": "@camp-protocol/kit",
+  "version": "0.1.0",
+  "description": "CAMP (Collaborative Agent Mediation Protocol): a shared decision layer for humans and AI agents, on top of WebSocket. Several people act at once, slow AI results arrive in between, and every screen stays consistent.",
+  "keywords": [
+    "camp",
+    "protocol",
+    "websocket",
+    "realtime",
+    "multiplayer",
+    "collaboration",
+    "ai-agents",
+    "human-in-the-loop",
+    "idempotency",
+    "zod"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Yuto Maki",
+    "url": "https://github.com/yuto-valiark"
+  },
+  "homepage": "https://github.com/camp-protocol/camp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/camp-protocol/camp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/camp-protocol/camp/issues"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/core/index.ts",
+    "./client": "./src/client/index.ts",
+    "./server": "./src/server/index.ts"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/core/index.d.ts",
+        "import": "./dist/core/index.js"
+      },
+      "./client": {
+        "types": "./dist/client/index.d.ts",
+        "import": "./dist/client/index.js"
+      },
+      "./server": {
+        "types": "./dist/server/index.d.ts",
+        "import": "./dist/server/index.js"
+      },
+      "./package.json": "./package.json"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "SPEC.md",
+    "README.md",
+    "README.ja.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "prepack": "node scripts/prepack.mjs && pnpm run build",
+    "check:pack": "node scripts/check-pack.mjs"
+  },
+  "dependencies": {
+    "ws": "^8.22.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/ws": "^8.18.2",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  }
+}
